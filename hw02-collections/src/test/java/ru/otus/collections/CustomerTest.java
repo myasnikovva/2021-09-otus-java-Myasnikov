@@ -43,9 +43,6 @@ class CustomerTest {
         long newScore = customer.getScores() + 10;
         String factData = map.get(new Customer(customerId, "IvanChangedName", newScore));
 
-//        for (Map.Entry<Customer, String> entry : map.entrySet())
-//            System.out.println(entry.getKey() + " = " + entry.getValue());
-
         //then
         assertThat(factData).isEqualTo(expectedData);
 
@@ -76,20 +73,30 @@ class CustomerTest {
         //then
         assertThat(smallestScore.getKey()).isEqualTo(customer2);
 
+        customerService.printKeys();
+        System.out.println("-------------------------------------");
+
         //when
         // подсказка:
         // a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.
-//        Map.Entry<Customer, String> middleScore = customerService.getNext(new Customer(10, "Key", 20));
-//        //then
-//        assertThat(middleScore.getKey()).isEqualTo(customer1);
-//        middleScore.getKey().setScores(10000);
-//        middleScore.getKey().setName("Vasy");
-//
-//        //when
-//        Map.Entry<Customer, String> biggestScore = customerService.getNext(customer1);
-//        //then
-//        assertThat(biggestScore.getKey()).isEqualTo(customer3);
-//
+        Map.Entry<Customer, String> middleScore = customerService.getNext(new Customer(10, "Key", 20));
+        //then
+        assertThat(middleScore.getKey()).isEqualTo(customer1);
+
+        customerService.printKeys();
+        System.out.println("-------------------------------------");
+
+        middleScore.getKey().setScores(10000);
+        middleScore.getKey().setName("Vasy");
+
+        customerService.printKeys();
+        System.out.println("-------------------------------------");
+
+        //when
+        Map.Entry<Customer, String> biggestScore = customerService.getNext(customer1);
+        //then
+        assertThat(biggestScore.getKey()).isEqualTo(customer3);
+
 //        //when
 //        Map.Entry<Customer, String> notExists = customerService.getNext(new Customer(100, "Not exists", 20000));
 //        //then
