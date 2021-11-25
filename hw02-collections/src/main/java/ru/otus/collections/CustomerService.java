@@ -16,7 +16,8 @@ public class CustomerService {
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
-        return customerServiceMap.higherEntry(customer);
+        Map.Entry<Customer, String> nextCustomer = customerServiceMap.higherEntry(customer);
+        return Map.entry(nextCustomer.getKey(), nextCustomer.getValue());
     }
 
     public void add(Customer customer, String data) {
